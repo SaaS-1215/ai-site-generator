@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Site Generator</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        /* Левая часть (Маркетинг) */
+        .left-side {
+            flex: 1;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .left-side h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .left-side p {
+            font-size: 1.1rem;
+            color: #b0b0d0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .features { list-style: none; }
+        .features li { margin-bottom: 10px; color: #8a8ac0; }
+        .features li::before { content: '✓'; color: #00f2fe; margin-right: 10px; font-weight: bold; }
+        
+        /* Правая часть (Форма) */
+        .right-side {
+            flex: 1;
+            padding: 50px;
+        }
+        .right-side h2 { margin-bottom: 30px; font-weight: 500; }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        input:focus { outline: none; border-color: #4facfe; background: rgba(255, 255, 255, 0.15); }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            outline: none; /* Убирает синюю обводку при клике */
+        }
+        button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4); }
+        button:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none; }
+        
+        /* Для телефонов */
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .left-side, .right-side { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <h1>AI Site Generator</h1>
+            <p>Создайте профессиональный многостраничный сайт за 30 секунд с помощью искусственного интеллекта.</p>
+            <ul class="features">
+                <li>Уникальный дизайн под ваш бизнес</li>
+                <li>Автоматическая верстка HTML/CSS/JS</li>
+                <li>Готовый ZIP-архив для скачивания</li>
+            </ul>
+        </div>
+        <div class="right-side">
+            <h2>Создать сайт</h2>
+            <!-- Здесь была ошибка, два тега form. Теперь один! -->
+            <form action="/generate" method="POST" id="genForm">
+                <input type="text" name="topic" placeholder="Тема (например, Пекарня)" required>
+                <input type="text" name="style" placeholder="Стиль (например, Минимализм)" required>
+                <input type="text" name="colors" placeholder="Цвета (например, Синий и Белый)" required>
+                <input type="text" name="audience" placeholder="Аудитория (например, Студенты)" required>
+                <input type="text" name="pages" placeholder="Страницы (Главная, О нас, Услуги)" required>
+                
+                <button type="submit" id="genBtn">Сгенерировать сайт</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript для показа загрузки -->
+    <script>
+        document.getElementById('genForm').addEventListener('submit', function() {
+            const btn = document.getElementById('genBtn');
+            btn.innerText = "⏳ Генерация... Пожалуйста, подождите (около 30 сек)";
+            btn.disabled = true; 
+        });
+    </script>
+</body>
+</html>
